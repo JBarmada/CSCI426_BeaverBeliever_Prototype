@@ -205,7 +205,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 8
@@ -472,9 +472,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 155
-        y: 52
+        y: 60
         width: 21
-        height: 25
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -714,9 +714,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 155
-        y: 20
+        y: 28
         width: 21
-        height: 25
+        height: 17
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1369,6 +1369,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Props_0
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 20
+        width: 21
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb8a185d2eec53d49960f05e3386d5ab
+      internalID: -1910054777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Props_1
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 52
+        width: 21
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 243c02173f31e0c4d9d77dfe37e1b2c3
+      internalID: -2065051237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -1407,6 +1451,8 @@ TextureImporter:
       PillarTall1: -7697879543379296236
       PillarTall2: -1811582006850511466
       PillarTall3: 838083816341856049
+      Props_0: -1910054777
+      Props_1: -2065051237
       TreeApples: 1339536321328131832
       TreeNoApples: -3953209486756653526
       Wall_1: -3224202456533794196
