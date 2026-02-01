@@ -1,3 +1,5 @@
 ﻿<Solution>
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="PauseManager.csproj" />
+  <Project Path="PauseManager-Editor.csproj" />
 </Solution>
