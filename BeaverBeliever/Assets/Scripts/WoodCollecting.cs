@@ -1,5 +1,7 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 public class WoodCollecting : MonoBehaviour
 {
@@ -7,6 +9,8 @@ public class WoodCollecting : MonoBehaviour
     private bool touchingTree = false;
     public string tree = "Trunk";
     public Vector3 carryOffset = new Vector3(0f, 1f, 0f);
+    public Vector3 dropOffset = new Vector3(0f, 3f, 0f);
+
     public Vector3 carriedScale = new Vector3(0.5f, 0.5f, 1f);
     public Vector3 droppedScale = new Vector3(1f, 1f, 1f);
 
@@ -16,47 +20,73 @@ public class WoodCollecting : MonoBehaviour
 
 
 
+
     Collision2D currentCollision;
+
+
+
+    private void Start()
+    {
+       
+        
+    }
 
     void Update()
     {
 
-        if (touchingTree && Input.GetMouseButtonDown(0) && carriedWood == null)
+        if (touchingTree && Mouse.current.leftButton.wasReleasedThisFrame && carriedWood == null)
         {
-            Vector3 spawnPos = currentCollision.transform.position;
-
             Transform parent = currentCollision.transform.parent;
             if (parent != null)
             {
                 Destroy(parent.gameObject);
+
+            }
+            else
+            {
+                Destroy(currentCollision.gameObject);
+
+
             }
 
-            //Destroy(currentCollision.gameObject);
-
             carriedWood = Instantiate(spritePrefab, transform);
+
             carriedWood.transform.localPosition = carryOffset;
 
             carriedWood.transform.localScale = carriedScale;
 
+
+            if (carriedWood.TryGetComponent<Rigidbody2D>(out var rb))
+            {
+                rb.simulated = false;
+            }
 
             if (carriedWood.TryGetComponent<Collider2D>(out var col))
             {
                 col.enabled = false;
             }
         }
-        else if (Input.GetMouseButtonDown(0) && carriedWood != null)
+        else if (Mouse.current.leftButton.wasReleasedThisFrame && carriedWood != null)
         {
-            carriedWood.transform.parent = null;
-
-            Vector3 dropPosition = transform.position + Vector3.down * 0.2f;
-            carriedWood.transform.position = dropPosition;
-            carriedWood.transform.localScale = droppedScale;
-
 
             if (carriedWood.TryGetComponent<Collider2D>(out var col))
             {
                 col.enabled = true;
             }
+
+            if (carriedWood.TryGetComponent<Rigidbody2D>(out var rb))
+            {
+                rb.simulated = true;
+            }
+
+            carriedWood.transform.parent = null;
+
+            Vector3 dropPosition = transform.position + dropOffset;
+            carriedWood.transform.position = dropPosition;
+            carriedWood.transform.localScale = droppedScale;
+
+
+       
             carriedWood = null;
         }
        

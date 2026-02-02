@@ -37,6 +37,8 @@ public class BeaverMovement : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
+
     }
 
     void UpdateAnimationAndFacing()
