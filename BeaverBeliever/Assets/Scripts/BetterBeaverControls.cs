@@ -89,12 +89,10 @@ public class BetterBeaverControls : MonoBehaviour
         if (onWater)
         {
             HandleWaterMovement();
-            Debug.Log("waters");
 
         }
         else
         {
-            Debug.Log("Groud");
             HandleGroundMovement();
         }
     }
@@ -157,111 +155,6 @@ public class BetterBeaverControls : MonoBehaviour
         animator.Play(newState);
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //}
-
-    //void FixedUpdate()
-    //{
-    //    bool onWater = IsOnWater();
-
-
-    //    float horizotnalVelocity = rb.linearVelocity.x;
-    //    float verticalVelocity = rb.linearVelocity.y;
-
-    //    if (onWater)
-    //    {
-
-
-    //        if ((Keyboard.current.aKey.isPressed && Keyboard.current.dKey.isPressed) || (!Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed))
-    //        {
-
-    //            if (horizotnalVelocity != 0)
-    //            {
-    //                horizotnalVelocity += -horizontal * waterDeccel * Time.deltaTime;
-    //            }
-    //            if (horizontal == -1f)
-    //            {
-    //                if (horizotnalVelocity > 0f) horizotnalVelocity = 0f;
-
-    //            }
-    //            else
-    //            {
-    //                if (horizotnalVelocity < 0f) horizotnalVelocity = 0f;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (Keyboard.current.aKey.isPressed)
-    //                horizontal = -1f;
-    //            else if (Keyboard.current.dKey.isPressed)
-    //                horizontal = 1f;
-
-    //            horizotnalVelocity += horizontal * waterAccel * Time.deltaTime;
-    //            horizotnalVelocity = Mathf.Clamp(horizotnalVelocity, -waterSpeed, waterSpeed);
-    //        }
-
-    //        if ((Keyboard.current.wKey.isPressed && Keyboard.current.sKey.isPressed) || (!Keyboard.current.wKey.isPressed && !Keyboard.current.sKey.isPressed))
-    //        {
-
-    //            if (verticalVelocity != 0)
-    //            {
-    //                verticalVelocity += -vertical * waterDeccel * Time.deltaTime;
-    //            }
-    //            if (vertical == -1f)
-    //            {
-    //                if (verticalVelocity > 0f) verticalVelocity = 0f;
-
-    //            }
-    //            else
-    //            {
-    //                if (verticalVelocity < 0f) verticalVelocity = 0f;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            if (Keyboard.current.wKey.isPressed)
-    //                vertical = -1f;
-    //            else if (Keyboard.current.sKey.isPressed)
-    //                vertical = 1f;
-
-    //            verticalVelocity += vertical * waterAccel * Time.deltaTime;
-    //            verticalVelocity = Mathf.Clamp(verticalVelocity, -waterSpeed, waterSpeed);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        if (Keyboard.current.wKey.isPressed && !Keyboard.current.sKey.isPressed)
-    //        {
-    //            movement.y = -landSpeed;
-    //        } else if (Keyboard.current.sKey.isPressed && !Keyboard.current.wKey.isPressed)
-    //        {
-    //            movement.y = landSpeed;
-
-    //        }
-
-    //        if (Keyboard.current.aKey.isPressed && !Keyboard.current.dKey.isPressed)
-    //        {
-    //            movement.x = -landSpeed;
-    //        }
-    //        else if (Keyboard.current.dKey.isPressed && !Keyboard.current.aKey.isPressed)
-    //        {
-    //            movement.x = landSpeed;
-
-    //        }
-
-    //        rb.MovePosition(rb.position + movement * waterSpeed * Time.fixedDeltaTime);
-
-
-    //    }
-
-
-    //    //rb.linearVelocity = new Vector2(horizotnalVelocity, verticalVelocity);
-
-
-    //}
 
 
 

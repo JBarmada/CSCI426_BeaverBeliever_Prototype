@@ -22,17 +22,28 @@ public class WolfChase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
 
+        transform.parent = null;
 
     }
 
 
     void FixedUpdate()
     {
-        Vector2 direction = (player.position - transform.position);
-        direction = GetCardinalDirection(direction);
-        //direction = direction.normalized;
+        Vector3 direction = (player.position - transform.position);
+       // direction = GetCardinalDirection(direction);
+       direction = direction.normalized;
 
 
+        Vector3 worldPos = transform.position;
+        worldPos.z = 0;
+        Vector3Int cellPos = waterTilemap.WorldToCell(worldPos);
+
+        Debug.Log(" X: " + cellPos.x + " Y: " + cellPos.y);
+
+        if (waterTilemap.HasTile(cellPos))
+        {
+            Debug.Log("current on water");
+        }
         TryMove(direction);
     }
 
@@ -45,18 +56,29 @@ public class WolfChase : MonoBehaviour
     }
 
 
-    void TryMove(Vector2 dir)
+    void TryMove(Vector3 dir)
     {
-        Vector3Int nextCell = WorldToCell(transform.position + (Vector3)dir);
+        // Vector3Int nextCell = WorldToCell(transform.position + (Vector3)dir);
 
+        Vector3 newPos = transform.position + dir * moveSpeed * Time.deltaTime;
         // Ground → move normally
-        if (!IsWater(nextCell))
+
+        //Debug.Log(" X: " + newPos.x + " Y: " + newPos.y);
+
+
+        
+
+
+
+        if (!IsWater(newPos))
         {
             rb.linearVelocity = dir * moveSpeed;
             return;
         }
         else
         {
+            Debug.Log("water");
+
             //TryJumpOverWater(dir);
             //return;
 
@@ -97,9 +119,12 @@ public class WolfChase : MonoBehaviour
 
    
 
-    bool IsWater(Vector3Int cell)
+    bool IsWater(Vector3 pos)
     {
-        return waterTilemap.HasTile(cell);
+
+        Vector3Int cellPos = waterTilemap.WorldToCell(pos);
+        return waterTilemap.HasTile(cellPos);
+        //return waterTilemap.HasTile(cell);
     }
 
     Vector3Int WorldToCell(Vector3 worldPos)
