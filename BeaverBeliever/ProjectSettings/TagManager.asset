@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Beaver
+  - Trunk
   layers:
   - Default
   - TransparentFX
@@ -64,6 +66,9 @@ TagManager:
     locked: 0
   - name: Decor
     uniqueID: 1518008911
+    locked: 0
+  - name: WalkOnLand
+    uniqueID: 1266817031
     locked: 0
   m_RenderingLayers:
   - Default

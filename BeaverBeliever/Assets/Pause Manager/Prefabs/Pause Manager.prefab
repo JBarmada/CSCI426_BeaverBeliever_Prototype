@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &462574
 Transform:
   m_ObjectHideFlags: 0
@@ -24,12 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117196}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &11451796
 MonoBehaviour:
@@ -64,19 +65,11 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
   useRewired: 0
-  m_PauseOnControllerDisconnect: 1
-  m_ResumeOnControllerConnect: 1
-  m_CheckAllPlayers: 1
-  m_IncludeSystemPlayer: 0
-  m_PlayerIds: 00000000
-  m_ActionNames: []
   assignKeyFromPrefs: 0
   m_PropertiesList:
   - name: Pause
     keyCode: 27
   m_PauseKeys: 1b000000
-  m_PauseOnSteamOverlayActive: 1
-  m_ResumeOnSteamOverlayInactive: 1
   pauseEvent:
     m_PersistentCalls:
       m_Calls: []
