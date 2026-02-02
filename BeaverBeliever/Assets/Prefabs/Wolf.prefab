@@ -107,9 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WolfChase
   moveSpeed: 3
-  jumpDistance: 10
-  jumpCooldown: 2
-  groundTilemap: {fileID: 0}
+  jumpSpeed: 6
+  groundTilemap: {fileID: 5487759098648726929, guid: 43a8999dc160d8642a286efba7ebecbd, type: 3}
   waterTilemap: {fileID: 2852474982908502299, guid: 0033d154320300f4295fdae2a8701c9b, type: 3}
 --- !u!50 &9111039299236046754
 Rigidbody2D:
