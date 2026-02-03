@@ -17,8 +17,6 @@ public class DieScript : MonoBehaviour
     {
         Debug.Log("Player died");
 
-      
-
         if (ActuallyDie)
         {
             if (gameOverPanel)
