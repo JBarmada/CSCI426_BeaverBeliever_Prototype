@@ -9,7 +9,7 @@ public class BetterBeaverControls : MonoBehaviour
     public float landSpeed = 3f;
     public float waterSpeed = 5f;
 
-
+    
     public Tilemap waterTilemap;
 
     private Rigidbody2D rb;
@@ -30,6 +30,9 @@ public class BetterBeaverControls : MonoBehaviour
     const string IDLE = "Beaver_Idle";
     const string WALK_SIDE = "Beaver_Walk_Side";
     const string WALK_UP = "Beaver_Walk_Up";
+    const string SWIM_SIDE = "Beaver_Swim_Side";
+    const string SWIM_IDLE = "Beaver_Swim_Idle";
+
     string currentState;
 
     public bool beaverMove = true;
@@ -113,10 +116,11 @@ public class BetterBeaverControls : MonoBehaviour
 
     void UpdateAnimationAndFacing()
     {
+        bool onWater = IsOnWater();
         // IDLE
         if (input == Vector2.zero)
         {
-            ChangeState(IDLE);
+            ChangeState(onWater ? SWIM_IDLE : IDLE);
 
             // IMPORTANT: reset flips on idle
             sr.flipY = false;
@@ -128,16 +132,29 @@ public class BetterBeaverControls : MonoBehaviour
         if (Mathf.Abs(input.x) >= Mathf.Abs(input.y))
         {
             // SIDE WALK
-            ChangeState(WALK_SIDE);
+            // SIDE MOVE (walk or swim)
+            ChangeState(onWater ? SWIM_SIDE : WALK_SIDE);
             sr.flipX = input.x < 0;
             sr.flipY = false;
+
         }
         else
         {
             // UP / DOWN (reuse up)
-            ChangeState(WALK_UP);
-            sr.flipX = false;
-            sr.flipY = input.y < 0; // down = flipped
+            if (onWater)
+            {
+                // Water: reuse side swim for up/down
+                ChangeState(SWIM_SIDE);
+                sr.flipX = false;
+                sr.flipY = false; // swimming doesn't flip vertically
+            }
+            else
+            {
+                // Land: use up/down walk
+                ChangeState(WALK_UP);
+                sr.flipX = false;
+                sr.flipY = input.y < 0; // down = flipped
+            }
         }
     }
 

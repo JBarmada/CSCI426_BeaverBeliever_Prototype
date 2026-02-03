@@ -15,6 +15,7 @@ public class BeaverMovement : MonoBehaviour
     const string IDLE = "Beaver_Idle";
     const string WALK_SIDE = "Beaver_Walk_Side";
     const string WALK_UP = "Beaver_Walk_Up";
+    const string SWIM_SIDE = "Beaver_Swim_Side";
 
     void Awake()
     {
