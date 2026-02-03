@@ -22,6 +22,11 @@ namespace WorldTime
         [Range(0.05f, 0.4f)]
         public float transitionPortion = 0.2f;
 
+        public int currentDay = 1;
+
+        public delegate void DayStarted(int day);
+        public static event DayStarted OnDayStarted;
+
         private Light2D _light;
         private float _timer;
         private bool _isDay = true;
@@ -41,12 +46,16 @@ namespace WorldTime
             {
                 _timer -= TotalCycleDuration;
                 _isDay = true;
+                currentDay++;
+                OnDayStarted?.Invoke(currentDay);
             }
+            
 
             if (_timer > dayDuration && _isDay)
             {
                 _isDay = false;
                 // Night start logic here
+                CheckVictory();
             }
 
             UpdateLighting();
@@ -61,9 +70,19 @@ namespace WorldTime
             _light.intensity = Mathf.Lerp(nightIntensity, dayIntensity, intensityT);
         }
 
-        /// <summary>
-        /// Full gradient traversal during day, hold at night.
-        /// </summary>
+        private void CheckVictory()
+        {
+            DamCollecting dam = FindObjectOfType<DamCollecting>();
+
+            if (dam != null && dam.collectedCount >= dam.requiredWood)
+            {
+                Debug.Log("Victory!");
+            }
+            else
+            {
+                Debug.Log("Failed the day!");
+            }
+        }
         private float GetColorTime()
         {
             if (_timer <= dayDuration)

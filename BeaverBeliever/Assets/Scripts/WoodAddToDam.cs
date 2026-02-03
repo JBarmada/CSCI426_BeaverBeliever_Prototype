@@ -12,8 +12,6 @@ public class WoodAddToDam : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-
         if (other.CompareTag("Dam"))
         {
             DamCollecting collector = other.GetComponent<DamCollecting>();
@@ -25,4 +23,5 @@ public class WoodAddToDam : MonoBehaviour
             }
         }
     }
+
 }
