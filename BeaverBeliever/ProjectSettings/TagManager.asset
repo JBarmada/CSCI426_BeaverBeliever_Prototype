@@ -61,6 +61,9 @@ TagManager:
   - name: Collision
     uniqueID: 1207467305
     locked: 0
+  - name: Tree
+    uniqueID: 3527537241
+    locked: 0
   - name: Characters
     uniqueID: 2612709975
     locked: 0
