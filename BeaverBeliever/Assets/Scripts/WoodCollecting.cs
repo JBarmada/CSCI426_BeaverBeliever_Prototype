@@ -1,102 +1,91 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
-using UnityEngine.UIElements;
 
 public class WoodCollecting : MonoBehaviour
 {
-    public GameObject spritePrefab;   // Prefab with SpriteRenderer
-    private bool touchingTree = false;
-    public string tree = "Trunk";
-    public Vector3 carryOffset = new Vector3(0f, 1f, 0f);
-    public Vector3 dropOffset = new Vector3(0f, 3f, 0f);
+    [Header("Wood Prefab")]
+    public GameObject woodPrefab;
 
-    public Vector3 carriedScale = new Vector3(0.5f, 0.5f, 1f);
-    public Vector3 droppedScale = new Vector3(1f, 1f, 1f);
+    [Header("Offsets")]
+    public Vector2 carryOffset = new Vector2(0f, 1f);
+    public Vector2 dropOffset = new Vector2(0f, 3f);
 
+    [Header("Tags")]
+    public string treeTag = "Trunk";
 
-
-    private GameObject carriedWood = null;
-
-
-
-
+    GameObject carriedWood;
     Collision2D currentCollision;
-
-
-
-    private void Start()
-    {
-       
-        
-    }
+    bool touchingTree;
 
     void Update()
     {
+        if (Mouse.current == null)
+            return;
 
-        if (touchingTree && Mouse.current.leftButton.wasReleasedThisFrame && carriedWood == null)
+        // CHOP TREE
+        if (touchingTree &&
+            Mouse.current.leftButton.wasReleasedThisFrame &&
+            carriedWood == null)
         {
-            Transform parent = currentCollision.transform.parent;
-            if (parent != null)
-            {
-                Destroy(parent.gameObject);
-
-            }
-            else
-            {
-                Destroy(currentCollision.gameObject);
-
-
-            }
-
-            carriedWood = Instantiate(spritePrefab, transform);
-
-            carriedWood.transform.localPosition = carryOffset;
-
-            carriedWood.transform.localScale = carriedScale;
-
-
-            if (carriedWood.TryGetComponent<Rigidbody2D>(out var rb))
-            {
-                rb.simulated = false;
-            }
-
-            if (carriedWood.TryGetComponent<Collider2D>(out var col))
-            {
-                col.enabled = false;
-            }
+            TryChopTree();
         }
-        else if (Mouse.current.leftButton.wasReleasedThisFrame && carriedWood != null)
+        // DROP WOOD
+        else if (Mouse.current.leftButton.wasReleasedThisFrame &&
+                 carriedWood != null)
         {
-
-            if (carriedWood.TryGetComponent<Collider2D>(out var col))
-            {
-                col.enabled = true;
-            }
-
-            if (carriedWood.TryGetComponent<Rigidbody2D>(out var rb))
-            {
-                rb.simulated = true;
-            }
-
-            carriedWood.transform.parent = null;
-
-            Vector3 dropPosition = transform.position + dropOffset;
-            carriedWood.transform.position = dropPosition;
-            carriedWood.transform.localScale = droppedScale;
-
-
-       
-            carriedWood = null;
+            DropWood();
         }
-       
     }
 
-   
+    void TryChopTree()
+    {
+        if (currentCollision == null)
+            return;
+
+        Tree tree = currentCollision.transform.GetComponentInParent<Tree>();
+        if (tree == null)
+            return;
+
+        bool destroyed = tree.Chop();
+
+        if (destroyed)
+        {
+            Destroy(tree.gameObject);
+            PickUpWood();
+            touchingTree = false;
+            currentCollision = null;
+        }
+    }
+
+    void PickUpWood()
+    {
+        carriedWood = Instantiate(woodPrefab, transform);
+        carriedWood.transform.localPosition = carryOffset;
+
+        if (carriedWood.TryGetComponent<Rigidbody2D>(out var rb))
+            rb.simulated = false;
+
+        if (carriedWood.TryGetComponent<Collider2D>(out var col))
+            col.enabled = false;
+    }
+
+    void DropWood()
+    {
+        carriedWood.transform.parent = null;
+        carriedWood.transform.position = transform.position + (Vector3)dropOffset;
+
+        if (carriedWood.TryGetComponent<Rigidbody2D>(out var rb))
+            rb.simulated = true;
+
+        if (carriedWood.TryGetComponent<Collider2D>(out var col))
+            col.enabled = true;
+
+        carriedWood = null;
+    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(tree))
+        if (collision.gameObject.CompareTag(treeTag))
         {
             touchingTree = true;
             currentCollision = collision;
@@ -105,14 +94,10 @@ public class WoodCollecting : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(tree))
+        if (collision.gameObject.CompareTag(treeTag))
         {
             touchingTree = false;
             currentCollision = null;
-
         }
     }
-
-
 }
-
