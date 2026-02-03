@@ -72,7 +72,7 @@ namespace WorldTime
 
         private void CheckVictory()
         {
-            DamCollecting dam = FindObjectOfType<DamCollecting>();
+            DamCollecting dam = FindFirstObjectByType<DamCollecting>();
 
             if (dam != null && dam.collectedCount >= dam.requiredWood)
             {
