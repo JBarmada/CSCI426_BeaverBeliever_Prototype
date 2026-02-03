@@ -25,8 +25,11 @@ public class GameplayDirector : MonoBehaviour
     [Header("Difficulty Balance")]
     public int day1RequiredWood = 4;
     public int day2RequiredWood = 8;
-    public int day1WolfCount = 5;  // Reduced for balance
-    public int day2WolfCount = 10; // Full difficulty
+    public int day1WolfCount = 5;  
+    public int day2WolfCount = 10; 
+
+    [Header("Game Win Delay")]
+    public float winDelaySeconds = 2f;
 
     private int currentDay = 1;
 
@@ -72,7 +75,6 @@ public class GameplayDirector : MonoBehaviour
         Debug.Log("Night has fallen...");
         damCollector.FinalizeDefense(); 
         
-        // LOGIC CHANGE: Determine how many wolves to spawn
         int wolvesToSpawn = (currentDay == 1) ? day1WolfCount : day2WolfCount;
 
         if (packSpawner) packSpawner.TriggerSpawn(wolvesToSpawn);
@@ -82,15 +84,22 @@ public class GameplayDirector : MonoBehaviour
     {
         Debug.Log("Morning has broken.");
         
+        // 1. Tell Wolves to Retreat immediately
         foreach(var wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
         {
             wolf.Retreat(); 
         }
 
-        // Logic check: Did the player survive?
-        // (If dam broke and player died, game over screen handles it. 
-        // If we are here, player is alive.)
+        // 2. Start the delay sequence
+        StartCoroutine(MorningSequence());
+    }
 
+    private IEnumerator MorningSequence()
+    {
+        // Wait 3 seconds for wolves to run and light to change
+        yield return new WaitForSeconds(winDelaySeconds);
+
+        // Logic check: Did the player survive?
         if (currentDay == 1)
         {
             SetupDay(2);

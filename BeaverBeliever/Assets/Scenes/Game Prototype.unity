@@ -1097,7 +1097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   dayDuration: 90
-  nightDuration: 30
+  nightDuration: 15
   dayNightGradient:
     serializedVersion: 2
     key0: {r: 0.043137256, g: 0.0627451, b: 0.14901961, a: 1}
@@ -2876,7 +2876,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 6b0ba3ef17a62404d985ccc14f6d9c95, type: 3}
     - target: {fileID: 2973602105973311538, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
       propertyPath: m_Name
-      value: Wolf
+      value: DayWolf
       objectReference: {fileID: 0}
     - target: {fileID: 2973602105973311538, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
       propertyPath: m_TagString
@@ -2885,6 +2885,22 @@ PrefabInstance:
     - target: {fileID: 6662536554753964790, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662536554753964790, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
+      propertyPath: attackRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662536554753964790, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
+      propertyPath: normalSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662536554753964790, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
+      propertyPath: enragedSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6662536554753964790, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
+      propertyPath: waterSpeedMultiplier
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8677051256721995143, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12283,12 +12299,13 @@ MonoBehaviour:
   audioSource: {fileID: 1625359511}
   roosterClip: {fileID: 0}
   winMenuCanvas: {fileID: 1627346792}
-  day1duration: 20
-  day2duration: 20
-  day1RequiredWood: 4
-  day2RequiredWood: 6
-  day1WolfCount: 3
-  day2WolfCount: 4
+  day1duration: 10
+  day2duration: 10
+  day1RequiredWood: 2
+  day2RequiredWood: 4
+  day1WolfCount: 2
+  day2WolfCount: 3
+  winDelaySeconds: 2
 --- !u!1001 &1871413325
 PrefabInstance:
   m_ObjectHideFlags: 0
