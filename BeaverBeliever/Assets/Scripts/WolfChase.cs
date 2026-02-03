@@ -20,8 +20,6 @@ public class WolfChase : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private float nextAttackTime = 0f;
-    
-    // NEW: Track if we are running away
     private bool isRetreating = false; 
 
     void Start()
@@ -40,26 +38,21 @@ public class WolfChase : MonoBehaviour
         rb.gravityScale = 0f;
     }
 
-    // --- NEW METHOD called by GameplayDirector ---
     public void Retreat()
     {
         isRetreating = true;
-        
-        // Disable collider so they don't kill the player while running past
         Collider2D col = GetComponent<Collider2D>();
         if (col) col.enabled = false;
     }
 
     void FixedUpdate()
     {
-        // 1. RETREAT LOGIC
         if (isRetreating)
         {
             HandleRetreat();
             return; 
         }
 
-        // 2. NORMAL LOGIC
         if (playerHide == null || damTarget == null) return;
 
         if (playerHide.hidden)
@@ -70,27 +63,20 @@ public class WolfChase : MonoBehaviour
 
     void HandleRetreat()
     {
-        // Direction: Away from player
         Vector3 runDirection = (transform.position - playerHide.transform.position).normalized;
-        
-        // Move Fast
         rb.linearVelocity = runDirection * enragedSpeed;
 
-        // Face direction
         if(runDirection.x != 0) transform.localScale = new Vector3(runDirection.x < 0 ? -1 : 1, 1, 1);
 
-        // Check if far enough away to delete
         float distanceToPlayer = Vector2.Distance(transform.position, playerHide.transform.position);
-        if (distanceToPlayer > 25f) // Despawn when 25 units away
-        {
-            Destroy(gameObject);
-        }
+        if (distanceToPlayer > 25f) Destroy(gameObject);
     }
 
     void MoveToAndAttack(Vector3 targetPos, bool isAttackingDam)
     {
         float dist = Vector2.Distance(transform.position, targetPos);
         
+        // Stop and Attack if close
         if (dist < 1.2f)
         {
             rb.linearVelocity = Vector2.zero;
@@ -104,7 +90,6 @@ public class WolfChase : MonoBehaviour
         {
             Vector2 dir = (targetPos - transform.position).normalized;
             float currentSpeed = (!isAttackingDam && damTarget.currentDamStrength <= 0) ? enragedSpeed : normalSpeed;
-            
             if (IsOnWater()) currentSpeed *= waterSpeedMultiplier;
 
             rb.linearVelocity = dir * currentSpeed;
@@ -122,6 +107,23 @@ public class WolfChase : MonoBehaviour
     void Attack(bool isAttackingDam)
     {
         if(animator) animator.SetTrigger("Attack");
-        if (isAttackingDam) damTarget.TakeDamage(attackDamage);
+
+        if (isAttackingDam)
+        {
+            damTarget.TakeDamage(attackDamage);
+        }
+        else
+        {
+            // FIX: Manually kill the player instead of waiting for collision
+            if (playerHide != null)
+            {
+                DieScript playerHealth = playerHide.GetComponent<DieScript>();
+                if (playerHealth != null)
+                {
+                    playerHealth.ActuallyDie = true; // Force the death flag to true
+                    playerHealth.SendMessage("Die"); // Execute death
+                }
+            }
+        }
     }
 }
