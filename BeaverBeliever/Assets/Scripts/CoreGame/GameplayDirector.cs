@@ -21,15 +21,19 @@ public class GameplayDirector : MonoBehaviour
     [Header("Game Configuration")]
     public int day1duration = 20;
     public int day2duration = 45;
+    
+    [Header("Difficulty Balance")]
     public int day1RequiredWood = 4;
     public int day2RequiredWood = 8;
+    public int day1WolfCount = 5;  // Reduced for balance
+    public int day2WolfCount = 10; // Full difficulty
 
     private int currentDay = 1;
 
     private void Start()
     {
-        WorldLight.OnNightStart += HandleNightStart; // Spawns Wolves
-        WorldLight.OnDayCycleEnd += HandleMorning;   // Checks Survival
+        WorldLight.OnNightStart += HandleNightStart; 
+        WorldLight.OnDayCycleEnd += HandleMorning;   
         if(winMenuCanvas) winMenuCanvas.gameObject.SetActive(false);
         SetupDay(1);
     }
@@ -44,10 +48,8 @@ public class GameplayDirector : MonoBehaviour
     {
         currentDay = dayIndex;
         
-        // Audio
         if(audioSource && roosterClip) audioSource.PlayOneShot(roosterClip);
 
-        // Rules
         if (currentDay == 1)
         {
             worldLight.dayDuration = day1duration;
@@ -61,35 +63,33 @@ public class GameplayDirector : MonoBehaviour
             if(dayWolf) dayWolf.SetActive(true);
         }
         
-        // Restore player ability to hide if they lost it previous night
         playerHide.ResetAbility(); 
-        
-        // Reset Clock
         worldLight.ResetDay();
     }
 
-    // 1. NIGHT STARTS -> WOLVES SPAWN
     private void HandleNightStart()
     {
         Debug.Log("Night has fallen...");
-        damCollector.FinalizeDefense(); // Sets Health = Collected Wood
+        damCollector.FinalizeDefense(); 
         
-        if (packSpawner) packSpawner.TriggerSpawn();
+        // LOGIC CHANGE: Determine how many wolves to spawn
+        int wolvesToSpawn = (currentDay == 1) ? day1WolfCount : day2WolfCount;
+
+        if (packSpawner) packSpawner.TriggerSpawn(wolvesToSpawn);
     }
 
-    // 2. MORNING COMES -> DID WE SURVIVE?
     private void HandleMorning()
     {
-        // If the code reaches here, the player is technically alive 
-        // (because DieScript handles game over immediately on death).
-        
         Debug.Log("Morning has broken.");
         
-        // Cleanup Wolves
         foreach(var wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
         {
-            wolf.Retreat(); // <--- NEW LINE
+            wolf.Retreat(); 
         }
+
+        // Logic check: Did the player survive?
+        // (If dam broke and player died, game over screen handles it. 
+        // If we are here, player is alive.)
 
         if (currentDay == 1)
         {

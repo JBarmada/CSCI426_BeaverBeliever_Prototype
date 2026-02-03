@@ -5,31 +5,31 @@ public class WolfSpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public float spawnInterval = 1f;
-    public int maxEnemies = 10;
+    
+    // We removed "maxEnemies" because we will pass it in as a parameter now
 
     [Header("Audio")]
-    public AudioSource audioSource; // Drag AudioSource here
-    public AudioClip spawnSound;    // Drag Wolf Howl clip here
+    public AudioSource audioSource; 
+    public AudioClip spawnSound;   
 
     private int spawned = 0;
 
-    // Called by GameplayDirector at night
-    public void TriggerSpawn()
+    void Awake()
     {
-        spawned = 0; 
-        
-        // Play the sound once when the pack arrives
-        if (audioSource && spawnSound)
-        {
-            audioSource.PlayOneShot(spawnSound);
-        }
-
-        StartCoroutine(SpawnRoutine());
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
     }
 
-    IEnumerator SpawnRoutine()
+    // UPDATED: Now accepts 'count'
+    public void TriggerSpawn(int count)
     {
-        while (spawned < maxEnemies)
+        spawned = 0; 
+        if (audioSource && spawnSound) audioSource.PlayOneShot(spawnSound);
+        StartCoroutine(SpawnRoutine(count));
+    }
+
+    IEnumerator SpawnRoutine(int totalToSpawn)
+    {
+        while (spawned < totalToSpawn)
         {
             Instantiate(enemyPrefab, transform.position, Quaternion.identity);
             spawned++;

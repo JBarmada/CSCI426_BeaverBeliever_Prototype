@@ -2363,6 +2363,7 @@ MonoBehaviour:
   collectedCount: 0
   requiredWood: 2
   currentDamStrength: 0
+  woodHealthMultiplier: 20
   playerHide: {fileID: 8934090131975898977}
   damStages:
   - {fileID: 0}
@@ -7507,7 +7508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WolfSpawner
   enemyPrefab: {fileID: 2973602105973311538, guid: 40a81a45217cc4447aa2d9cb563b40e9, type: 3}
   spawnInterval: 1
-  maxEnemies: 10
   audioSource: {fileID: 1259539381}
   spawnSound: {fileID: 8300000, guid: c1249f05f9399ae4b9153e03553963f2, type: 3}
 --- !u!4 &1259539380
@@ -12285,8 +12285,10 @@ MonoBehaviour:
   winMenuCanvas: {fileID: 1627346792}
   day1duration: 20
   day2duration: 20
-  day1RequiredWood: 2
-  day2RequiredWood: 2
+  day1RequiredWood: 4
+  day2RequiredWood: 6
+  day1WolfCount: 3
+  day2WolfCount: 4
 --- !u!1001 &1871413325
 PrefabInstance:
   m_ObjectHideFlags: 0
