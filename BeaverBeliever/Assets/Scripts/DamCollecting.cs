@@ -60,7 +60,7 @@ public class DamCollecting : MonoBehaviour
             damStages.Length - 1
         );
 
-        spriteRenderer.sprite = damStages[stageIndex];
+        //spriteRenderer.sprite = damStages[stageIndex];
 
         // UI progress bar
         if (progressFill != null)

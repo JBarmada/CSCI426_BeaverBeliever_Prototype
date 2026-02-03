@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,14 +9,18 @@ public class WoodCollecting : MonoBehaviour
 
     [Header("Offsets")]
     public Vector2 carryOffset = new Vector2(0f, 1f);
-    public Vector2 dropOffset = new Vector2(0f, 3f);
+    public Vector2 dropOffset = new Vector2(0f, 1f);
 
     [Header("Tags")]
     public string treeTag = "Trunk";
+    public string woodTag = "Wood";
+
 
     GameObject carriedWood;
     Collision2D currentCollision;
     bool touchingTree;
+    bool touchingWood;
+
 
     void Update()
     {
@@ -28,6 +33,14 @@ public class WoodCollecting : MonoBehaviour
             carriedWood == null)
         {
             TryChopTree();
+        }else if (touchingWood &&
+            Mouse.current.leftButton.wasReleasedThisFrame &&
+            carriedWood == null)
+        {
+            Destroy(currentCollision.gameObject);
+            PickUpWood();
+            touchingWood = false;
+            currentCollision = null;
         }
         // DROP WOOD
         else if (Mouse.current.leftButton.wasReleasedThisFrame &&
@@ -36,6 +49,9 @@ public class WoodCollecting : MonoBehaviour
             DropWood();
         }
     }
+
+
+    
 
     void TryChopTree()
     {
@@ -89,6 +105,11 @@ public class WoodCollecting : MonoBehaviour
         {
             touchingTree = true;
             currentCollision = collision;
+        }else if (collision.gameObject.CompareTag(woodTag))
+        {
+            touchingWood = true;
+            currentCollision = collision;
+
         }
     }
 
@@ -98,6 +119,12 @@ public class WoodCollecting : MonoBehaviour
         {
             touchingTree = false;
             currentCollision = null;
+        }
+        else if (collision.gameObject.CompareTag(woodTag))
+        {
+            touchingWood = true;
+            currentCollision = collision;
+
         }
     }
 }
