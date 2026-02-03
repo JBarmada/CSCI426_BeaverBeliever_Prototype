@@ -110,6 +110,7 @@ MonoBehaviour:
   moveSpeed: 3
   groundTilemap: {fileID: 5487759098648726929, guid: 43a8999dc160d8642a286efba7ebecbd, type: 3}
   waterTilemap: {fileID: 2852474982908502299, guid: 0033d154320300f4295fdae2a8701c9b, type: 3}
+  playerhide: {fileID: 87059840603913919, guid: a012b707d5df21349867f78598366e54, type: 3}
 --- !u!50 &9111039299236046754
 Rigidbody2D:
   serializedVersion: 5

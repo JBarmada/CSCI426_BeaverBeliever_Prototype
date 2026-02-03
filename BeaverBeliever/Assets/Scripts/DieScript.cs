@@ -17,12 +17,14 @@ public class DieScript : MonoBehaviour
     {
         Debug.Log("Player died");
 
-        if (gameOverPanel)
-            gameOverPanel.Show();
+      
 
         if (ActuallyDie)
         {
-           foreach (WolfChase wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
+            if (gameOverPanel)
+                gameOverPanel.Show();
+
+            foreach (WolfChase wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
             {
                 wolf.enabled = false;
             }

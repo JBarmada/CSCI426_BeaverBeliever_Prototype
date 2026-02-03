@@ -14,6 +14,8 @@ public class DamCollecting : MonoBehaviour
     [Header("UI")]
     public Image progressFill; // UI Image (Fill type)
 
+    public bool damFull = false;
+
 
     private void OnEnable()
     {
@@ -69,7 +71,8 @@ public class DamCollecting : MonoBehaviour
 
     private void OnDamCompleted()
     {
-        Debug.Log("Dam completed!");
+        damFull = true;
+       // Debug.Log("Dam completed!");
         // Trigger victory, sound, animation, etc
     }
 }

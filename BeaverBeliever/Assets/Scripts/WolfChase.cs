@@ -8,6 +8,8 @@ public class WolfChase : MonoBehaviour
     public Tilemap groundTilemap;
     public Tilemap waterTilemap;
 
+    public PlayerHide playerhide;
+
     Transform player;
     Rigidbody2D rb;
 
@@ -39,17 +41,26 @@ public class WolfChase : MonoBehaviour
 
     void TryMove(Vector2 dir)
     {
-        Vector2 nextPos = rb.position + dir * moveSpeed * Time.fixedDeltaTime;
 
-        if (!IsWater(nextPos))
-        {
-            rb.linearVelocity = dir * moveSpeed;
-        }
-        else
+        if (playerhide.hidden)
         {
             rb.linearVelocity = Vector2.zero;
         }
+        else
+        {
+            Vector2 nextPos = rb.position + dir * moveSpeed * Time.fixedDeltaTime;
+
+            if (!IsWater(nextPos))
+            {
+                rb.linearVelocity = dir * moveSpeed;
+            }
+            else
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+        }
     }
+       
 
     bool IsWater(Vector2 worldPos)
     {   

@@ -32,6 +32,8 @@ public class BetterBeaverControls : MonoBehaviour
     const string WALK_UP = "Beaver_Walk_Up";
     string currentState;
 
+    public bool beaverMove = true;
+
 
 
 
@@ -84,17 +86,28 @@ public class BetterBeaverControls : MonoBehaviour
 
     void FixedUpdate()
     {
-        bool onWater = IsOnWater();
 
-        if (onWater)
+        if (beaverMove)
         {
-            HandleWaterMovement();
+            bool onWater = IsOnWater();
+
+            if (onWater)
+            {
+                HandleWaterMovement();
+
+            }
+            else
+            {
+                HandleGroundMovement();
+            }
 
         }
         else
         {
-            HandleGroundMovement();
+            rb.linearVelocity = Vector2.zero;
         }
+
+      
     }
 
 
