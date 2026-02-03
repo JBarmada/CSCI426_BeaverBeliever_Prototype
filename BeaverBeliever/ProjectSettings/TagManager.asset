@@ -8,6 +8,7 @@ TagManager:
   - Trunk
   - Dam
   - Wolf
+  - Wood
   layers:
   - Default
   - TransparentFX
