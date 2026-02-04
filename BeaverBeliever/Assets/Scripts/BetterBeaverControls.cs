@@ -38,6 +38,13 @@ public class BetterBeaverControls : MonoBehaviour
     public bool beaverMove = true;
 
 
+    public AudioSource audioSource;
+    public AudioClip walkClip;
+    public AudioClip swimClip;
+    bool walking = true;
+
+
+
 
 
 
@@ -182,13 +189,32 @@ public class BetterBeaverControls : MonoBehaviour
     void HandleGroundMovement()
     {
         rb.MovePosition(rb.position + input * landSpeed * Time.fixedDeltaTime);
+        if (!walking)
+        {
+            if (audioSource && walkClip)
+            {
+                audioSource.Stop();
+                audioSource.PlayOneShot(walkClip);
+            }
+            walking = true;
+
+        }
 
 
     }
 
     void HandleWaterMovement()
     {
+        if (walking)
+        {
+            if (audioSource && swimClip)
+            {
+                audioSource.Stop();
+                audioSource.PlayOneShot(swimClip);
+            }
+            walking = false;
 
+        }
         // Gradually build momentum
         velocity = rb.linearVelocity;
         velocity += input * waterAcceleration;
