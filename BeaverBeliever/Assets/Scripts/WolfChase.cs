@@ -99,7 +99,7 @@ public class WolfChase : MonoBehaviour
             if (IsOnWater()) currentSpeed *= waterSpeedMultiplier;
 
             rb.linearVelocity = dir * currentSpeed;
-            if(dir.x != 0) transform.localScale = new Vector3(dir.x < 0 ? -1 : 1, 1, 1);
+            if(dir.x != 0) transform.localScale = new Vector3(dir.x < 0 ? -4 : 4, 4, 4);
         }
     }
 
