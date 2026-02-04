@@ -40,9 +40,12 @@ public class DamCollecting : MonoBehaviour
 
     public void SetRequiredWood(int amount)
     {
- 
+
+        currentDamStrength = currentDamStrength * amount/requiredWood ;
+
         requiredWood = amount;
         totalDamStrength = requiredWood * woodHealthMultiplier;
+      
         //ResetProgress(); 
     }
 
