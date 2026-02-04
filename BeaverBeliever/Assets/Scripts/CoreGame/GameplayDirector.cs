@@ -1,6 +1,7 @@
 using UnityEngine;
 using WorldTime; 
 using System.Collections;
+using Unity.VisualScripting;
 
 public class GameplayDirector : MonoBehaviour
 {
@@ -63,7 +64,8 @@ public class GameplayDirector : MonoBehaviour
             if (audioSource && roosterClip) audioSource.PlayOneShot(roosterClip);
             worldLight.dayDuration = day2duration;
             damCollector.SetRequiredWood(day2RequiredWood);
-            if(dayWolf) dayWolf.SetActive(true);
+            damCollector.UpdateVisuals();
+            if (dayWolf) dayWolf.SetActive(true);
             dayWolf.transform.localScale = new Vector3(4f, 4f, 0);
         }
         

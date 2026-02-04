@@ -106,7 +106,7 @@ public class DamCollecting : MonoBehaviour
 
     // --- VISUALS ---
 
-    private void UpdateVisuals()
+    public void UpdateVisuals()
     {
         if (requiredWood == 0) return; 
 
