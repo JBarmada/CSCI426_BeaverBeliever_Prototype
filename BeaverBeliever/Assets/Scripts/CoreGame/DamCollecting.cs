@@ -27,13 +27,14 @@ public class DamCollecting : MonoBehaviour
 
     public float progress = 0;
 
-    public float spriteScale = 2;
+    public float spriteScale = 1;
 
     // --- SETUP METHODS ---
 
     public void Awake()
     {
         totalDamStrength = requiredWood * woodHealthMultiplier;
+        spriteScale = spriteRenderer.size.x;
 
     }
 
@@ -118,7 +119,7 @@ public class DamCollecting : MonoBehaviour
                 0, damStages.Length - 1
             );
             spriteRenderer.sprite = damStages[stageIndex];
-            //spriteRenderer.size = new Vector2(spriteScale * (stageIndex + 1), spriteScale * (stageIndex + 1));
+            spriteRenderer.size = new Vector2(spriteScale * (stageIndex + 1), spriteScale * (stageIndex + 1));
         }
 
         if (progressFill != null) progressFill.fillAmount = progress;
