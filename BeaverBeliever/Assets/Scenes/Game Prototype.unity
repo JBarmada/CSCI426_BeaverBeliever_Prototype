@@ -6422,7 +6422,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -8172,7 +8172,7 @@ MonoBehaviour:
   packSpawner: {fileID: 1259539379}
   dayWolf: {fileID: 1919561441}
   audioSource: {fileID: 1625359511}
-  roosterClip: {fileID: 0}
+  roosterClip: {fileID: 8300000, guid: 8bdbbcd364046d44aac2230e9ca4a809, type: 3}
   winMenuCanvas: {fileID: 1627346792}
   day1duration: 10
   day2duration: 10
@@ -17042,7 +17042,7 @@ PrefabInstance:
     - target: {fileID: 7043771316420574832, guid: a012b707d5df21349867f78598366e54, type: 3}
       propertyPath: waterTilemap
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1940437580}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
