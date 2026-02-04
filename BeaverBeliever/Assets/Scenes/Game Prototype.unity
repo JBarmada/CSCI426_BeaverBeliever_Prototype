@@ -1133,7 +1133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   dayDuration: 90
-  nightDuration: 15
+  nightDuration: 20
   dayNightGradient:
     serializedVersion: 2
     key0: {r: 0.043137256, g: 0.0627451, b: 0.14901961, a: 1}
@@ -10163,8 +10163,8 @@ MonoBehaviour:
   roosterClip: {fileID: 8300000, guid: 8bdbbcd364046d44aac2230e9ca4a809, type: 3}
   winClip: {fileID: 8300000, guid: 76aa87ba624d2ad43a38dc6434d60f77, type: 3}
   winMenuCanvas: {fileID: 1627346792}
-  day1duration: 10
-  day2duration: 10
+  day1duration: 40
+  day2duration: 60
   day1RequiredWood: 2
   day2RequiredWood: 4
   day1WolfCount: 2
