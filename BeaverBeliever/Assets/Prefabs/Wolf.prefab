@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9111039299236046754}
   - component: {fileID: 694105368420455279}
   - component: {fileID: 6073935564093023385}
+  - component: {fileID: 798757524649555716}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1682257321
-  m_SortingLayer: 6
+  m_SortingLayer: 8
   m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 2757b6955ed999a42988700465c114fa, type: 3}
@@ -107,10 +108,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57850a1a353fae48a4ca06709ed1708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WolfChase
-  moveSpeed: 3
-  groundTilemap: {fileID: 5487759098648726929, guid: 43a8999dc160d8642a286efba7ebecbd, type: 3}
+  normalSpeed: 3
+  enragedSpeed: 5.5
+  attackRate: 1
+  attackDamage: 1
+  waterSpeedMultiplier: 0.5
   waterTilemap: {fileID: 2852474982908502299, guid: 0033d154320300f4295fdae2a8701c9b, type: 3}
-  playerhide: {fileID: 87059840603913919, guid: a012b707d5df21349867f78598366e54, type: 3}
+  playerHide: {fileID: 0}
+  damTarget: {fileID: 0}
+  audioSource: {fileID: 798757524649555716}
+  slashClip: {fileID: 8300000, guid: 56703418e3aed4c47a5f6622816b8e41, type: 3}
+  biteClip: {fileID: 8300000, guid: fd25a15f9797641458336cccfb445343, type: 3}
 --- !u!50 &9111039299236046754
 Rigidbody2D:
   serializedVersion: 5
@@ -206,3 +214,100 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!82 &798757524649555716
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2973602105973311538}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

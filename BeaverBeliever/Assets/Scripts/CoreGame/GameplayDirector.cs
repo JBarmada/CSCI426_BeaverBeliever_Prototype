@@ -51,7 +51,6 @@ public class GameplayDirector : MonoBehaviour
     {
         currentDay = dayIndex;
         
-        if(audioSource && roosterClip) audioSource.PlayOneShot(roosterClip);
 
         if (currentDay == 1)
         {
@@ -61,6 +60,7 @@ public class GameplayDirector : MonoBehaviour
         }
         else if (currentDay == 2)
         {
+            if (audioSource && roosterClip) audioSource.PlayOneShot(roosterClip);
             worldLight.dayDuration = day2duration;
             damCollector.SetRequiredWood(day2RequiredWood);
             if(dayWolf) dayWolf.SetActive(true);

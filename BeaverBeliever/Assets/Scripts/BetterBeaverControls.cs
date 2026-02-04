@@ -194,7 +194,8 @@ public class BetterBeaverControls : MonoBehaviour
             if (audioSource && walkClip)
             {
                 audioSource.Stop();
-                audioSource.PlayOneShot(walkClip);
+                audioSource.clip = walkClip;
+                audioSource.Play();
             }
             walking = true;
 
@@ -210,7 +211,8 @@ public class BetterBeaverControls : MonoBehaviour
             if (audioSource && swimClip)
             {
                 audioSource.Stop();
-                audioSource.PlayOneShot(swimClip);
+                audioSource.clip = swimClip;
+                audioSource.Play();
             }
             walking = false;
 
