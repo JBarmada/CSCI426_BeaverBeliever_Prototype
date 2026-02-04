@@ -15,6 +15,9 @@ public class WoodCollecting : MonoBehaviour
     public string treeTag = "Trunk";
     public string woodTag = "Wood";
 
+    public float woodTimer = 0f;
+    public const float woodCooldown = 0.2f;
+
 
     GameObject carriedWood;
     Collision2D currentCollision;
@@ -24,13 +27,15 @@ public class WoodCollecting : MonoBehaviour
 
     void Update()
     {
+        woodTimer -= Time.deltaTime;
+
         if (Mouse.current == null)
             return;
 
         // CHOP TREE
         if (touchingTree &&
             Mouse.current.leftButton.wasReleasedThisFrame &&
-            carriedWood == null)
+            carriedWood == null && woodTimer <= 0 )
         {
             TryChopTree();
         }else if (touchingWood &&
@@ -43,7 +48,7 @@ public class WoodCollecting : MonoBehaviour
             currentCollision = null;
         }
         // DROP WOOD
-        else if (Mouse.current.leftButton.wasReleasedThisFrame &&
+        else if (Mouse.current.rightButton.wasReleasedThisFrame &&
                  carriedWood != null)
         {
             DropWood();
@@ -70,6 +75,7 @@ public class WoodCollecting : MonoBehaviour
             PickUpWood();
             touchingTree = false;
             currentCollision = null;
+            woodTimer = woodCooldown;
         }
     }
 

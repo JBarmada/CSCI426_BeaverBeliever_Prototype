@@ -79,7 +79,28 @@ public class BetterBeaverControls : MonoBehaviour
 
         }
 
-        if(input != Vector2.zero)
+
+        if (Keyboard.current.upArrowKey.isPressed && !Keyboard.current.downArrowKey.isPressed)
+        {
+            input.y = 1;
+        }
+        else if (Keyboard.current.downArrowKey.isPressed && !Keyboard.current.upArrowKey.isPressed)
+        {
+            input.y = -1;
+
+        }
+
+        if (Keyboard.current.leftArrowKey.isPressed && !Keyboard.current.rightArrowKey.isPressed)
+        {
+            input.x = -1;
+        }
+        else if (Keyboard.current.rightArrowKey.isPressed && !Keyboard.current.leftArrowKey.isPressed)
+        {
+            input.x = 1;
+
+        }
+
+        if (input != Vector2.zero)
             input = input.normalized;
 
         UpdateAnimationAndFacing();
