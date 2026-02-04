@@ -12,10 +12,15 @@ public class GameplayDirector : MonoBehaviour
     public WolfSpawner packSpawner;
     public GameObject dayWolf;       
     
-    [Header("Audio")]
-    public AudioSource audioSource;
+    [Header("SFX Audio (One Shot)")]
+    public AudioSource sfxSource; // Drag your existing AudioSource here
     public AudioClip roosterClip;
     public AudioClip winClip;
+
+    [Header("Music Audio (Looping)")]
+    public AudioSource musicSource; // ADD A NEW AudioSource for this!
+    public AudioClip dayMusic;      // Drag Day Music here
+    public AudioClip nightMusic;    // Drag Scary Night Music here
 
     [Header("UI References")]
     public SlideUpPanel winMenuCanvas;
@@ -37,6 +42,9 @@ public class GameplayDirector : MonoBehaviour
 
     private void Start()
     {
+        // Ensure music loops
+        if (musicSource) musicSource.loop = true;
+
         WorldLight.OnNightStart += HandleNightStart; 
         WorldLight.OnDayCycleEnd += HandleMorning;   
         if(winMenuCanvas) winMenuCanvas.gameObject.SetActive(false);
@@ -52,7 +60,9 @@ public class GameplayDirector : MonoBehaviour
     private void SetupDay(int dayIndex)
     {
         currentDay = dayIndex;
-        
+
+        // 1. PLAY DAY MUSIC (Start of Day 1)
+        PlayMusic(dayMusic);
 
         if (currentDay == 1)
         {
@@ -62,7 +72,8 @@ public class GameplayDirector : MonoBehaviour
         }
         else if (currentDay == 2)
         {
-            if (audioSource && roosterClip) audioSource.PlayOneShot(roosterClip);
+            if (sfxSource && roosterClip) sfxSource.PlayOneShot(roosterClip);
+            
             worldLight.dayDuration = day2duration;
             damCollector.SetRequiredWood(day2RequiredWood);
             damCollector.UpdateVisuals();
@@ -79,8 +90,10 @@ public class GameplayDirector : MonoBehaviour
         Debug.Log("Night has fallen...");
         damCollector.FinalizeDefense(); 
         
-        int wolvesToSpawn = (currentDay == 1) ? day1WolfCount : day2WolfCount;
+        // 2. SWITCH TO SCARY MUSIC
+        PlayMusic(nightMusic);
 
+        int wolvesToSpawn = (currentDay == 1) ? day1WolfCount : day2WolfCount;
         if (packSpawner) packSpawner.TriggerSpawn(wolvesToSpawn);
     }
 
@@ -88,22 +101,22 @@ public class GameplayDirector : MonoBehaviour
     {
         Debug.Log("Morning has broken.");
         
-        // 1. Tell Wolves to Retreat immediately
+        // 3. SWITCH BACK TO DAY MUSIC (Immediate relief)
+        PlayMusic(dayMusic);
+
+        // Tell Wolves to Retreat
         foreach(var wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
         {
             wolf.Retreat(); 
         }
 
-        // 2. Start the delay sequence
         StartCoroutine(MorningSequence());
     }
 
     private IEnumerator MorningSequence()
     {
-        // Wait 3 seconds for wolves to run and light to change
         yield return new WaitForSeconds(winDelaySeconds);
 
-        // Logic check: Did the player survive?
         if (currentDay == 1)
         {
             SetupDay(2);
@@ -117,9 +130,24 @@ public class GameplayDirector : MonoBehaviour
     private void TriggerWin()
     {
         Debug.Log("Victory!");
-        if (audioSource && roosterClip) audioSource.PlayOneShot(winClip);
+        
+        // Stop music so we can hear the win clip clearly
+        if (musicSource) musicSource.Stop();
+        if (sfxSource && winClip) sfxSource.PlayOneShot(winClip);
 
         if (winMenuCanvas) winMenuCanvas.Show();
         Time.timeScale = 0f; 
+    }
+
+    // --- HELPER TO SWAP TRACKS SMOOTHLY ---
+    void PlayMusic(AudioClip clip)
+    {
+        if (musicSource == null || clip == null) return;
+
+        // If this song is already playing, don't restart it!
+        if (musicSource.clip == clip && musicSource.isPlaying) return;
+
+        musicSource.clip = clip;
+        musicSource.Play();
     }
 }

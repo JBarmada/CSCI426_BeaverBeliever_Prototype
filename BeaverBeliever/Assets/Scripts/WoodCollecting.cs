@@ -82,6 +82,8 @@ public class WoodCollecting : MonoBehaviour
         if (destroyed)
         {
             Destroy(tree.gameObject);
+            // play audio clip of tree falling down
+            
             PickUpWood();
             touchingTree = false;
             currentCollision = null;
@@ -138,7 +140,7 @@ public class WoodCollecting : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag(woodTag))
         {
-            touchingWood = true;
+            touchingWood = false;
             currentCollision = collision;
 
         }
