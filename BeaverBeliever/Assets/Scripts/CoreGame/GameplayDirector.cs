@@ -15,6 +15,7 @@ public class GameplayDirector : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip roosterClip;
+    public AudioClip winClip;
 
     [Header("UI References")]
     public SlideUpPanel winMenuCanvas;
@@ -116,7 +117,9 @@ public class GameplayDirector : MonoBehaviour
     private void TriggerWin()
     {
         Debug.Log("Victory!");
-        if(winMenuCanvas) winMenuCanvas.Show();
+        if (audioSource && roosterClip) audioSource.PlayOneShot(winClip);
+
+        if (winMenuCanvas) winMenuCanvas.Show();
         Time.timeScale = 0f; 
     }
 }
