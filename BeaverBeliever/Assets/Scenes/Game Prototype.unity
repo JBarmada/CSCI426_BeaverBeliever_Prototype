@@ -15330,7 +15330,7 @@ PrefabInstance:
     - target: {fileID: 158351289897411637, guid: a012b707d5df21349867f78598366e54, type: 3}
       propertyPath: woodChopClip
       value: 
-      objectReference: {fileID: 8300000, guid: d645a3c8ef095834e925380ddfa2ea4f, type: 3}
+      objectReference: {fileID: 8300000, guid: 9f3be86c26925a44f95155979417512b, type: 3}
     - target: {fileID: 862979163185229392, guid: a012b707d5df21349867f78598366e54, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.45
