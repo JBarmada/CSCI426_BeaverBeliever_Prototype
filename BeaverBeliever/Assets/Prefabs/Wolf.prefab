@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57850a1a353fae48a4ca06709ed1708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WolfChase
-  normalSpeed: 3
+  normalSpeed: 4
   enragedSpeed: 5.5
   attackRate: 1
   attackDamage: 1
