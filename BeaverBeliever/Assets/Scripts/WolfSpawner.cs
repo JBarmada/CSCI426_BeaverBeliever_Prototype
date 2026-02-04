@@ -31,7 +31,9 @@ public class WolfSpawner : MonoBehaviour
     {
         while (spawned < totalToSpawn)
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+
+            GameObject wolf = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            wolf.transform.localScale = new Vector3(4f, 4f, 0f);
             spawned++;
             yield return new WaitForSeconds(spawnInterval);
         }

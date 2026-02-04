@@ -60,10 +60,10 @@ public class BetterBeaverControls : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         audioSource.Play();
-        audioSource.Pause();
 
         //audioSource.Stop();
-        walking = true;
+        walking = false;
+        moving = true;
 
 
 
@@ -208,7 +208,8 @@ public class BetterBeaverControls : MonoBehaviour
             }
             walking = true;
 
-        }else if (moving == false && input != Vector2.zero)
+        }
+        if (moving == false && input != Vector2.zero)
         {
             audioSource.UnPause();
             moving = true;
@@ -256,7 +257,8 @@ public class BetterBeaverControls : MonoBehaviour
             }
             walking = false;
 
-        }else if (moving == false && velocity != Vector2.zero)
+        }
+        if (moving == false && velocity != Vector2.zero)
         {
             audioSource.UnPause();
         }

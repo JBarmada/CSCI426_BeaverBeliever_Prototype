@@ -64,6 +64,7 @@ public class GameplayDirector : MonoBehaviour
             worldLight.dayDuration = day2duration;
             damCollector.SetRequiredWood(day2RequiredWood);
             if(dayWolf) dayWolf.SetActive(true);
+            dayWolf.transform.localScale = new Vector3(4f, 4f, 0);
         }
         
         playerHide.ResetAbility(); 
