@@ -18,6 +18,13 @@ public class WoodCollecting : MonoBehaviour
     public float woodTimer = 0f;
     public const float woodCooldown = 0.2f;
 
+    public AudioSource audioSource;
+    public AudioClip woodChopClip;
+
+
+
+
+
 
     GameObject carriedWood;
     Collision2D currentCollision;
@@ -66,6 +73,9 @@ public class WoodCollecting : MonoBehaviour
         Tree tree = currentCollision.transform.GetComponentInParent<Tree>();
         if (tree == null)
             return;
+
+        if(audioSource && woodChopClip) audioSource.PlayOneShot(woodChopClip);
+
 
         bool destroyed = tree.Chop();
 

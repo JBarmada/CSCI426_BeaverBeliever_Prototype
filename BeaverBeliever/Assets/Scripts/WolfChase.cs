@@ -20,7 +20,13 @@ public class WolfChase : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private float nextAttackTime = 0f;
-    private bool isRetreating = false; 
+    private bool isRetreating = false;
+
+
+
+    public AudioSource audioSource;
+    public AudioClip slashClip;
+    public AudioClip biteClip;
 
     void Start()
     {
@@ -111,16 +117,20 @@ public class WolfChase : MonoBehaviour
         if (isAttackingDam)
         {
             damTarget.TakeDamage(attackDamage);
+            if (audioSource && slashClip) audioSource.PlayOneShot(slashClip);
+
         }
         else
         {
             // FIX: Manually kill the player instead of waiting for collision
             if (playerHide != null)
             {
+                if (audioSource && biteClip) audioSource.PlayOneShot(biteClip);
+
                 DieScript playerHealth = playerHide.GetComponent<DieScript>();
                 if (playerHealth != null)
                 {
-                    playerHealth.ActuallyDie = true; // Force the death flag to true
+                    //playerHealth.ActuallyDie = true; // Force the death flag to true
                     playerHealth.SendMessage("Die"); // Execute death
                 }
             }

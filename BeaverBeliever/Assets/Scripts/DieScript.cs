@@ -5,6 +5,11 @@ public class DieScript : MonoBehaviour
     public bool ActuallyDie = false;
     public SlideUpPanel gameOverPanel;
 
+
+
+    public AudioSource audioSource;
+    public AudioClip deathClip;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Wolf"))
@@ -17,17 +22,19 @@ public class DieScript : MonoBehaviour
     {
         Debug.Log("Player died");
 
-        //if (ActuallyDie)
-        //{
-        //    Debug.Log("ActuallyDie: " + ActuallyDie);
-        //    if (gameOverPanel)
-        //        gameOverPanel.Show();
+        if (ActuallyDie)
+        {
+            if (audioSource && deathClip) audioSource.PlayOneShot(deathClip);
 
-        //    foreach (WolfChase wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
-        //    {
-        //        wolf.enabled = false;
-        //    }
-        //    Destroy(gameObject);
-        //}
+            Debug.Log("ActuallyDie: " + ActuallyDie);
+            if (gameOverPanel)
+                gameOverPanel.Show();
+
+            foreach (WolfChase wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
+            {
+                wolf.enabled = false;
+            }
+            Destroy(gameObject);
+        }
     }
 }
