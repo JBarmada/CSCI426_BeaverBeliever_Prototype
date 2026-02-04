@@ -24,7 +24,7 @@ public class ProgressBar : MonoBehaviour
     }
     void Update()
     {
-        float percent = (float)damCollector.collectedCount / damCollector.requiredWood;
+        float percent = (float)damCollector.currentDamStrength / damCollector.totalDamStrength;
         currentScale = percent * maxScale;
         transform.localScale = new Vector3(currentScale, yScale, 0f);
 

@@ -17,16 +17,17 @@ public class DieScript : MonoBehaviour
     {
         Debug.Log("Player died");
 
-        if (ActuallyDie)
-        {
-            if (gameOverPanel)
-                gameOverPanel.Show();
+        //if (ActuallyDie)
+        //{
+        //    Debug.Log("ActuallyDie: " + ActuallyDie);
+        //    if (gameOverPanel)
+        //        gameOverPanel.Show();
 
-            foreach (WolfChase wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
-            {
-                wolf.enabled = false;
-            }
-            Destroy(gameObject);
-        }
+        //    foreach (WolfChase wolf in FindObjectsByType<WolfChase>(FindObjectsSortMode.None))
+        //    {
+        //        wolf.enabled = false;
+        //    }
+        //    Destroy(gameObject);
+        //}
     }
 }
