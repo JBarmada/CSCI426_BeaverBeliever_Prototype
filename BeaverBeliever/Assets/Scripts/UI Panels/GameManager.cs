@@ -14,6 +14,10 @@ public class GameManager : MonoBehaviour
 
     private bool tabHeld;
 
+   public GameObject beaver;
+
+    //public AudioSource audioSource;
+
     void Start()
     {
         // Start game paused at menu
@@ -23,6 +27,7 @@ public class GameManager : MonoBehaviour
 
         startMenu.SetActive(true);
         if (pauseMenu) pauseMenu.gameObject.SetActive(false);
+        beaver.SetActive(false);
     }
 
     void Update()
@@ -78,6 +83,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         startMenu.SetActive(false);
         if (pauseMenu) pauseMenu.gameObject.SetActive(false);
+        beaver.SetActive(true);
+
     }
 
     public void TogglePause()

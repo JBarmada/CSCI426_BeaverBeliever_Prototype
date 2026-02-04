@@ -9700,6 +9700,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6295869390347207356, guid: 0033d154320300f4295fdae2a8701c9b, type: 3}
   m_PrefabInstance: {fileID: 1814881445}
   m_PrefabAsset: {fileID: 0}
+--- !u!1839735485 &1814881448 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 2852474982908502299, guid: 0033d154320300f4295fdae2a8701c9b, type: 3}
+  m_PrefabInstance: {fileID: 1814881445}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1838019511
 GameObject:
   m_ObjectHideFlags: 0
@@ -15381,9 +15386,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 44150784}
     - target: {fileID: 7043771316420574832, guid: a012b707d5df21349867f78598366e54, type: 3}
+      propertyPath: moving
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7043771316420574832, guid: a012b707d5df21349867f78598366e54, type: 3}
+      propertyPath: swimClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 61cbca9f8bdc5d84f923efa381605c2d, type: 3}
+    - target: {fileID: 7043771316420574832, guid: a012b707d5df21349867f78598366e54, type: 3}
       propertyPath: walkClip
       value: 
-      objectReference: {fileID: 8300000, guid: df7087e4d8a8bb546bc08ce68632903f, type: 3}
+      objectReference: {fileID: 8300000, guid: ec542b303b0495949bb3d0af6246a479, type: 3}
     - target: {fileID: 7043771316420574832, guid: a012b707d5df21349867f78598366e54, type: 3}
       propertyPath: audioSource
       value: 
@@ -15391,7 +15404,7 @@ PrefabInstance:
     - target: {fileID: 7043771316420574832, guid: a012b707d5df21349867f78598366e54, type: 3}
       propertyPath: waterTilemap
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1814881448}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

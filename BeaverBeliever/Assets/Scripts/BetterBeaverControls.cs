@@ -41,7 +41,8 @@ public class BetterBeaverControls : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip walkClip;
     public AudioClip swimClip;
-    bool walking = true;
+    public bool walking = true;
+    public bool moving = false;
 
 
 
@@ -57,6 +58,13 @@ public class BetterBeaverControls : MonoBehaviour
 
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+
+        audioSource.Play();
+        audioSource.Pause();
+
+        //audioSource.Stop();
+        walking = true;
+
 
 
     }
@@ -189,6 +197,7 @@ public class BetterBeaverControls : MonoBehaviour
     void HandleGroundMovement()
     {
         rb.MovePosition(rb.position + input * landSpeed * Time.fixedDeltaTime);
+        
         if (!walking)
         {
             if (audioSource && walkClip)
@@ -199,6 +208,15 @@ public class BetterBeaverControls : MonoBehaviour
             }
             walking = true;
 
+        }else if (moving == false && input != Vector2.zero)
+        {
+            audioSource.UnPause();
+            moving = true;
+        }
+        else if (moving == true && input == Vector2.zero)
+        {
+            audioSource.Pause();
+            moving = false;
         }
 
 
@@ -206,8 +224,30 @@ public class BetterBeaverControls : MonoBehaviour
 
     void HandleWaterMovement()
     {
+
+
+
+        velocity = rb.linearVelocity;
+        velocity += input * waterAcceleration;
+        velocity = Vector2.ClampMagnitude(velocity, waterSpeed);
+        velocity *= 1f - waterDrag * Time.deltaTime;
+        rb.linearVelocity = velocity;
+
+        if (moving == false && input != Vector2.zero)
+        {
+            audioSource.UnPause();
+            moving = true;
+
+        }
+        else if (moving == true && input == Vector2.zero)
+        {
+            audioSource.Pause();
+            moving = false;
+
+        }
         if (walking)
         {
+
             if (audioSource && swimClip)
             {
                 audioSource.Stop();
@@ -216,15 +256,16 @@ public class BetterBeaverControls : MonoBehaviour
             }
             walking = false;
 
+        }else if (moving == false && velocity != Vector2.zero)
+        {
+            audioSource.UnPause();
+        }
+        else if (moving == true && velocity == Vector2.zero)
+        {
+            audioSource.Pause();
         }
         // Gradually build momentum
-        velocity = rb.linearVelocity;
-        velocity += input * waterAcceleration;
-        velocity = Vector2.ClampMagnitude(velocity, waterSpeed);
-
-        velocity *= 1f - waterDrag * Time.deltaTime;
-
-        rb.linearVelocity = velocity;
+       
     }
 
     void ChangeState(string newState)
