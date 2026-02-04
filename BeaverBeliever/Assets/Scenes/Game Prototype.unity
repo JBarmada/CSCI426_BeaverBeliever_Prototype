@@ -2861,10 +2861,10 @@ MonoBehaviour:
   woodHealthMultiplier: 20
   playerHide: {fileID: 8934090131975898977}
   damStages:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: -2062055350846857252, guid: c082b6f87af95b0499ae93401d6eedae, type: 3}
+  - {fileID: -1887087845170121067, guid: c082b6f87af95b0499ae93401d6eedae, type: 3}
+  - {fileID: -6294613345178949002, guid: c082b6f87af95b0499ae93401d6eedae, type: 3}
+  - {fileID: -1709477422299874835, guid: c082b6f87af95b0499ae93401d6eedae, type: 3}
   - {fileID: 0}
   spriteRenderer: {fileID: 0}
   progressFill: {fileID: 0}
@@ -2907,7 +2907,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.8, y: 1.2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2964,7 +2964,7 @@ SpriteRenderer:
   m_SortingLayer: 5
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -3224202456533794196, guid: be785b53e8101134cb49e391918a7a82, type: 3}
+  m_Sprite: {fileID: -2062055350846857252, guid: c082b6f87af95b0499ae93401d6eedae, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8872,6 +8872,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   startMenu: {fileID: 1393000305}
   pauseMenu: {fileID: 749059807}
+  beaver: {fileID: 7121758415072196941}
 --- !u!4 &1727645425
 Transform:
   m_ObjectHideFlags: 0
